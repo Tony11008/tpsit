@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Scheda Personale:</h1>
+    <h2>Nome e cognome: Tony Naguib</h2>
+    <img src="Foto1.heif" alt="Foto1.heif"> 
+    <h2>Età: 16 anni</h2>
+    <h2>Classe e Istituto: 3B/INFO J.C. MAXWELL</h2>
+    <h2>Data di nascita: 25/11/2008</h2>
+    <h2>Luogo di residenza: NICHELINO<br> </h2>
+    <h1>Paragrafo su di me: <br> </h1>
+    <p>Sono Tony Naguib, sono egiziano e sono arrivto in Italia 3 anni fa.<br></p>
+    <h1>Le mie interessi: <br> </h1>
+    <p>le mie interessi sono la palestra,informatica,moto e auto.<br></p>
+    <h1>tre competenze: <br> </h1>
+    <p>Informatica:negli ultimmi anni ho imparato 2 linguaggi di programmazione che sono python e c++ e sto ancora imparando l'html e voglio imparare ancora di più.
+    Palestra:ho imparato un'anno fa come funziona la palestra e come mangiare ecc.<br></p>
+</body>
+
+</html>
