@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bottoni con Alert</title>
+    <style>
+        .bottone1 {
+            background-color: #2b14bffb; 
+            color: white;
+        }
+        
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+    </style>
+    
+</head>
+<body>
+
+    <h2>Clicca i bottoni e vedrai</h2>
+    <input type="text" id="mioinput">
+    <button class="bottone1" onclick="mostraAlert()">Click me</button>
+    <script>
+        function mostraAlert() {
+            let m=document.getElementById("mioinput").value;
+            alert(" "+m);
+        }
+
+    </script>
+
+</body>
+</html>
