@@ -1,0 +1,70 @@
+<!DOCTYPE html> 
+<html lang="it"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcolo Dislivello</title> 
+    <style> 
+        
+      #scatola_principale{
+        padding: 5px;
+        margin:10px;
+        height: 220px;
+        width: 550px;
+        border: 4px solid black;
+        background-color: rgb(255, 255, 255);
+        border-radius: 25px;
+        text-align: center;
+      }
+
+      input, button { 
+            width: 80%; 
+            padding: 8px; 
+            margin-top: 10px; 
+        } 
+
+        .elementout.innerHTML  { 
+            font-weight: bold; 
+            margin-top: 10px; 
+        } 
+
+    </style> 
+</head> 
+<body> 
+
+    <div id="scatola_principale">
+        <label for="val1"></label>
+        <input type="number" id="val1" placeholder="Altezza partenza (m)">
+        <br>
+
+        <label for="val2"></label>
+        <input type="number" id="val2" placeholder="Altezza pausa (m)">
+        <br>
+        
+        <label for="val3"></label>
+        <input type="number" id="val3" placeholder="Altezza arrivo (m)">
+        <br>
+        
+    
+
+        <button id="c1" onclick="calcolaDislivello()">Calcola Dislivello</button>
+        <br>
+        
+        <p id="elementout.innerHTML">Il dislivello è di: </p>
+
+    </div>
+    
+    <script> 
+        const elementout = document.getElementById("elementout.innerHTML");
+
+    function calcolaDislivello() {
+        let partenza = parseFloat(document.getElementById("val1").value);
+        let arrivo = parseFloat(document.getElementById("val3").value);
+        
+        elementout.innerHTML = "Il dislivello è di: " + Math.abs(arrivo - partenza) + " metri.";
+    }
+
+
+    </script> 
+</body> 
+</html>
