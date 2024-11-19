@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contatore Decrementale</title>
+    <style>
+        /* Nasconde la div contenente l'immagine all'inizio */
+        #immagine {
+            display: none; /* L'immagine è nascosta inizialmente */
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Contatore Decrementale</h1>
+    <p id="counter">3</p> <!-- Questo visualizzerà il contatore da 3 a 1 -->
+
+    <!-- Div che conterrà l'immagine, inizialmente nascosta -->
+    <div id="immagine">
+        <img src="https://via.placeholder.com/150" alt="Immagine che appare al termine del countdown">
+    </div>
+
+    <script>
+        // Inizializza il contatore a 3
+        let count = 3;
+
+        // Riferimento agli elementi HTML
+        const counterElement = document.getElementById('counter');
+        const imageDiv = document.getElementById('immagine');
+
+        // Funzione per decrementare il contatore
+        function decrementCounter() {
+            // Mostra il contatore attuale
+            counterElement.innerHTML = count;
+
+            // Se il contatore arriva a 0, mostra l'immagine
+            if (count === 0) {
+                imageDiv.style.display = 'block';  // Mostra la div con l'immagine
+                clearInterval(countdown);  // Ferma il countdown
+            } else {
+                count--;  // Decrementa il contatore
+            }
+        }
+
+        // Avvia il countdown ogni secondo (1000 ms)
+        const countdown = setInterval(decrementCounter, 1000);
+    </script>
+</body>
+</html>
