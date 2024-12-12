@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gioco Morra Cinese</title>
+    <style>
+        #container {
+            text-align: center;
+        }
+
+
+        .img-option {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+
+        #result {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+
+
+        #score {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+
+
+        body{
+            background-color: aquamarine;
+           
+        }
+
+
+    </style>
+</head>
+<body>
+
+
+<div id="container">
+    <h1>Gioco della Morra Cinese</h1>
+    <p>Clicca una delle seguenti opzioni per giocare:</p>
+
+
+   
+    <img src="sasso.jpg" alt="Sasso" class="img-option" id="sasso">
+    <img src="carta.jpg" alt="Carta" class="img-option" id="carta">
+    <img src="forbice.jpg" alt="Forbice" class="img-option" id="forbice">
+
+
+    <div id="result"></div>
+    <div id="score">Punteggio: Umano = 0 | Bot = 0</div>
+</div>
+
+
+<script>
+    let morra = ["sasso", "carta", "forbice"];
+    let scoreUmano = 0;
+    let scoreBot = 0;
+
+
+   
+    function mossaBot() {
+        let numeroCasuale = Math.floor(Math.random() * 3);
+        return morra[numeroCasuale];
+    }
+
+
+
+
+    function determinaVincitore(umano, bot) {
+        if (umano === bot) {
+            return "Pareggio!";
+        } else if ((umano === "sasso" && bot === "forbice") ||
+                   (umano === "carta" && bot === "sasso") ||
+                   (umano === "forbice" && bot === "carta")) {
+            scoreUmano++;
+            return "Hai vinto!";
+        } else {
+            scoreBot++;
+            return "Il bot ha vinto!";
+        }
+    }
+
+
+    // Funzione per aggiornare il punteggio e il risultato
+    function aggiornaRisultato(umano, bot) {
+        let risultato = determinaVincitore(umano, bot);
+        document.getElementById("result").innerHTML = `La tua mossa: ${umano} | Mossa del bot: ${bot}. ${risultato}`;
+        document.getElementById("score").innerHTML = `Punteggio: Umano - ${scoreUmano} | Bot - ${scoreBot}`;
+    }
+
+
+    // Event listeners per ogni immagine
+    document.getElementById("sasso").addEventListener("click", function() {
+        let botMossa = mossaBot();
+        aggiornaRisultato("sasso", botMossa);
+    });
+
+
+    document.getElementById("carta").addEventListener("click", function() {
+        let botMossa = mossaBot();
+        aggiornaRisultato("carta", botMossa);
+    });
+
+
+    document.getElementById("forbice").addEventListener("click", function() {
+        let botMossa = mossaBot();
+        aggiornaRisultato("forbice", botMossa);
+    });
+
+
+
+
+
+
+   
+
+
+</script>
+
+
+</body>
+</html>
+
+
+
