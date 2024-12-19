@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numeri Casuali e Media</title>
+    <style>
+        #container {
+            height: 200px;
+            width: 500px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Numeri Casuali e Media</h1>
+    <p>Numeri estratti:</p>
+    <div id="container">
+        <p id="out1"></p>
+    </div>
+
+    <p>Media attuale:</p>
+    <div id="container">
+        <p id="media"></p>
+    </div>
+
+    <script>
+        let numeriCasuali = []; // Array per memorizzare i numeri casuali
+
+        // Funzione per generare un numero casuale tra 1 e 90
+        function generaNumeroCasuale() {
+            return Math.floor(Math.random() * 90) + 1;
+        }
+
+        // Funzione per calcolare la media dei numeri presenti nell'array
+        function calcolaMedia(array) {
+            if (array.length === 0) return 0; // Evita divisioni per 0
+            let somma = array.reduce((acc, val) => acc + val, 0);
+            return (somma / array.length).toFixed(2); // Media con 2 decimali
+        }
+
+        // Temporizzatore per estrarre un numero casuale ogni 3 secondi
+        setInterval(() => {
+            let numero = generaNumeroCasuale(); // Genera il numero casuale
+            numeriCasuali.push(numero); // Aggiunge il numero all'array
+
+            // Aggiorna l'output
+            document.getElementById("out1").innerHTML = numeriCasuali.join(", ");
+            document.getElementById("media").innerHTML = calcolaMedia(numeriCasuali);
+        }, 3000);
+    </script>
+
+</body>
+</html>
