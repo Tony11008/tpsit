@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bottoni con Data e Tempo</title>
+
+    <style>
+            #scatola{
+                background-color: hsla(0, 0%, 0%, 0.867); 
+                border:10px solid #FF8000;
+                color: white;
+                padding: 110px;
+                margin: 110px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                border-radius: 30px;
+                text-align: center;
+                justify-content: center;
+                justify-items: center;
+                margin-left: 550px;
+
+                
+            }
+            
+            
+            #bottone1{
+                background-color: #FF8000; 
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                border-radius: 30px;
+
+            }
+
+            #bottone2{
+                background-color: #FF8000; 
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                border-radius: 30px;
+
+            }
+
+            #bottone3{
+                background-color: #FF8000; 
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                border-radius: 30px;
+
+            }
+
+            #bottone4{
+                background-color: #FF8000; 
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                border-radius: 30px;
+
+            }
+
+
+    </style>
+
+
+
+
+</head>
+<body>
+
+    <div id="scatola">
+        <button id="bottone1" onclick="handleClick()">Bottone 1</button>
+        <button id="bottone2" onclick="handleClick()">Bottone 2</button>
+        <button id="bottone3" onclick="handleClick()">Bottone 3</button>
+        <button id="bottone4" onclick="handleClick()">Bottone 4</button>
+        <p id="timestamp"></p>
+        <ul id="timeList"></ul>
+    </div>
+
+   
+
+    <script>
+        var firstClickTime = null;
+
+        function handleClick() {
+            var now = new Date();
+            document.getElementById("timestamp").innerText = now.toLocaleString();
+
+            if (firstClickTime === null) {
+                firstClickTime = now.getTime();
+            } else {
+                var diff = now.getTime() - firstClickTime;
+                var listItem = document.createElement("li");
+                listItem.innerText = diff + " ms";
+                document.getElementById("timeList").appendChild(listItem);
+            }
+        }
+    </script>
+
+</body>
+</html>
+
+
