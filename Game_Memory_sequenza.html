@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gioco Memory Sequenziale</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: darkred;
+            color: #fff;
+            height: 100vh;
+        }
+        .grid-buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .grid-buttons button {
+            height: 100px;
+            font-size: 1.5rem;
+            border: none;
+            border-radius: 15px;
+            transition: transform 0.2s;
+        }
+        .grid-buttons button:active {
+            transform: scale(0.95);
+        }
+        .btn-warning {
+            box-shadow: 0 0 20px 5px rgba(255, 193, 7, 0.7);
+        }
+    </style>
+</head>
+<body class="text-center d-flex flex-column align-items-center justify-content-center">
+    <h1 class="mb-4">Memory Sequenziale</h1>
+    <button class="btn btn-light text-dark mb-3 px-4 py-2 fw-bold" onclick="startGame()">Inizia Gioco</button>
+    <div id="score" class="mb-4 fs-4">Punteggio: 0</div>
+    <p id="demo" class="mb-3"></p>
+
+    <div class="grid-buttons">
+        <button class="btn btn-secondary" id="0" onclick="handleClick(0)">1</button>
+        <button class="btn btn-secondary" id="1" onclick="handleClick(1)">2</button>
+        <button class="btn btn-secondary" id="2" onclick="handleClick(2)">3</button>
+        <button class="btn btn-secondary" id="3" onclick="handleClick(3)">4</button>
+        <button class="btn btn-secondary" id="4" onclick="handleClick(4)">5</button>
+        <button class="btn btn-secondary" id="5" onclick="handleClick(5)">6</button>
+        <button class="btn btn-secondary" id="6" onclick="handleClick(6)">7</button>
+        <button class="btn btn-secondary" id="7" onclick="handleClick(7)">8</button>
+        <button class="btn btn-secondary" id="8" onclick="handleClick(8)">9</button>
+    </div>
+
+    <script>
+        function getCurrentTime() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            const milliseconds = now.getMilliseconds().toString().padStart(3, '0');
+            return `${hours}:${minutes}:${seconds}:${milliseconds}`;
+        }
+
+        setInterval(() => {
+            document.getElementById("demo").innerHTML = getCurrentTime();
+        }, 100);
+
+        let sequence = [];
+        let userInput = [];
+        let score = 0;
+
+        function startGame() {
+            sequence = [];
+            userInput = [];
+            score = 0;
+            document.getElementById('score').innerText = `Punteggio: ${score}`;
+            nextRound();
+        }
+
+        function nextRound() {
+            userInput = [];
+            sequence.push(Math.floor(Math.random() * 9));
+            showSequence();
+        }
+
+        function showSequence() {
+            let i = 0;
+            const interval = setInterval(() => {
+                const btn = document.getElementById(sequence[i]);
+                btn.classList.add('btn-warning');
+                setTimeout(() => btn.classList.remove('btn-warning'), 500);
+                i++;
+                if (i === sequence.length) clearInterval(interval);
+            }, 1000);
+        }
+
+        function handleClick(num) {
+            userInput.push(num);
+            const index = userInput.length - 1;
+            if (userInput[index] !== sequence[index]) {
+                alert('Hai sbagliato! Riprova.');
+                startGame();
+                return;
+            }
+            if (userInput.length === sequence.length) {
+                score++;
+                document.getElementById('score').innerText = `Punteggio: ${score}`;
+                setTimeout(nextRound, 1000);
+            }
+        }
+    </script>
+</body>
+</html>
