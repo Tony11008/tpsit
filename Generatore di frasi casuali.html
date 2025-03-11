@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generatore di Frasi Casuali</title>
+</head>
+<body>
+    <h1>Generatore di Frasi Casuali</h1>
+    <button onclick="generateSentence()">Genera Frase</button>
+    <p id="sentence">Premi il bottone per generare una frase!</p>
+
+    <script>
+        function generateSentence() {
+            const subjects = ["Il cane", "La gatta", "Un ragazzo"];
+            const verbs = ["mangia", "corre", "salta"];
+            const objects = ["un gelato", "la palla", "un libro"];
+
+            const subject = subjects[Math.floor(Math.random() * subjects.length)];
+            const verb = verbs[Math.floor(Math.random() * verbs.length)];
+            const object = objects[Math.floor(Math.random() * objects.length)];
+            const sentence = `${subject} ${verb} ${object}.`;
+
+            document.getElementById("sentence").innerText = sentence;
+        }
+    </script>
+</body>
+</html>
