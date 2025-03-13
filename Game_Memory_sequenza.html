@@ -36,7 +36,6 @@
     <h1 class="mb-4">Memory Sequenziale</h1>
     <button class="btn btn-light text-dark mb-3 px-4 py-2 fw-bold" onclick="startGame()">Inizia Gioco</button>
     <div id="score" class="mb-4 fs-4">Punteggio: 0</div>
-    <p id="demo" class="mb-3"></p>
 
     <div class="grid-buttons">
         <button class="btn btn-secondary" id="0" onclick="handleClick(0)">1</button>
@@ -51,19 +50,6 @@
     </div>
 
     <script>
-        function getCurrentTime() {
-            const now = new Date();
-            const hours = now.getHours().toString().padStart(2, '0');
-            const minutes = now.getMinutes().toString().padStart(2, '0');
-            const seconds = now.getSeconds().toString().padStart(2, '0');
-            const milliseconds = now.getMilliseconds().toString().padStart(3, '0');
-            return `${hours}:${minutes}:${seconds}:${milliseconds}`;
-        }
-
-        setInterval(() => {
-            document.getElementById("demo").innerHTML = getCurrentTime();
-        }, 100);
-
         let sequence = [];
         let userInput = [];
         let score = 0;
