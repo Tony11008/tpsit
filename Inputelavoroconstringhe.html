@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestione Stringhe</title>
+</head>
+<body>
+
+    <h1>Gestione Stringhe</h1>
+    <form id="stringForm">
+        <input type="text" id="stringA" placeholder="Stringa A" required>
+        <input type="text" id="stringB" placeholder="Stringa B" required>
+        <button type="submit">Invia</button>
+    </form>
+
+    <div id="output"></div>
+
+    <script>
+        document.getElementById('stringForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var a = document.getElementById('stringA').value;
+            var b = document.getElementById('stringB').value;
+
+            var output = 
+                "Lunghezza A: " + a.length + "<br>" +
+                "Lunghezza B: " + b.length + "<br>" +
+                "A al contrario: " + a.split('').reverse().join('') + "<br>" +
+                "B al contrario: " + b.split('').reverse().join('') + "<br>" +
+                "Unione: " + (a + b) + "<br>" +
+                "Somma lunghezze: " + (a.length + b.length) + "<br>";
+
+            if (b.length > 20) {
+                output += "Attenzione: Stringa B troppo lunga!";
+            }
+
+            document.getElementById('output').innerHTML = output;
+        });
+    </script>
+
+</body>
+</html>
