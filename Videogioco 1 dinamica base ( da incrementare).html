@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Videogioco - Click Challenge</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #222;
+            color: white;
+            text-align: center;
+        }
+        .game-container {
+            position: relative;
+            width: 100vw;
+            height: 80vh;
+        }
+        .click-point {
+            width: 40px;
+            height: 40px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>Click Challenge</h1>
+        <form id="playerForm" class="mb-3">
+            <input type="text" id="playerName" class="form-control mb-2" placeholder="Nome" required>
+            <input type="email" id="playerEmail" class="form-control mb-2" placeholder="Email" required>
+            <button type="submit" class="btn btn-primary">Inizia Gioco</button>
+        </form>
+        <div class="game-container d-none" id="gameArea">
+            <div id="clickPoint" class="click-point"></div>
+        </div>
+        <p id="clickCount" class="mt-3"></p>
+        <div id="results" class="d-none mt-4"></div>
+    </div>
+
+    <script>
+        let clicks = [];
+        let startTime;
+        let clickPoint = document.getElementById("clickPoint");
+        let gameArea = document.getElementById("gameArea");
+        let form = document.getElementById("playerForm");
+        let resultsDiv = document.getElementById("results");
+        
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+            form.classList.add("d-none");
+            gameArea.classList.remove("d-none");
+            startGame();
+        });
+
+        function startGame() {
+            clicks = [];
+            startTime = Date.now();
+            moveTarget();
+        }
+
+        function moveTarget() {
+            let x = Math.random() * (window.innerWidth - 50);
+            let y = Math.random() * (window.innerHeight - 50);
+            clickPoint.style.left = x + "px";
+            clickPoint.style.top = y + "px";
+            clickPoint.style.display = "block";
+        }
+
+        clickPoint.addEventListener("click", function() {
+            let time = Date.now() - startTime;
+            clicks.push(time);
+            if (clicks.length < 10) {
+                moveTarget();
+            } else {
+                endGame();
+            }
+        });
+
+        function endGame() {
+            let totalTime = clicks[clicks.length - 1] - clicks[0];
+            let avgTime = totalTime / clicks.length;
+            resultsDiv.innerHTML = "<h3>Risultati</h3>" +
+                "<p><strong>Nome:</strong> " + document.getElementById("playerName").value + "</p>" +
+                "<p><strong>Email:</strong> " + document.getElementById("playerEmail").value + "</p>" +
+                "<p><strong>Tempo Totale:</strong> " + totalTime + " ms</p>" +
+                "<p><strong>Tempo Medio:</strong> " + avgTime.toFixed(2) + " ms</p>";
+            gameArea.classList.add("d-none");
+            resultsDiv.classList.remove("d-none");
+        }
+    </script>
+</body>
+</html>
