@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcolo Funzione di Attivazione</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Calcolo Funzione di Attivazione</h2>
+    <form onsubmit="event.preventDefault(); processInputs();">
+        <label>Numero A: <input type="number" id="numA" required></label><br>
+        <label>Numero B: <input type="number" id="numB" required></label><br>
+        <label>Numero C: <input type="number" id="numC" required></label><br>
+        <label>Numero D: <input type="number" id="numD" required></label><br>
+        <button type="submit">Calcola</button>
+    </form>
+    <p id="output"></p>
+
+    <script>
+        function calculateOutputs(a, b, c, d) {
+            let sum = a + b + c + d;
+            let sigmoid = 1 / (1 + Math.exp(-sum));
+            return [sum, sigmoid];
+        }
+
+        function processInputs() {
+            let a = parseFloat(document.getElementById('numA').value);
+            let b = parseFloat(document.getElementById('numB').value);
+            let c = parseFloat(document.getElementById('numC').value);
+            let d = parseFloat(document.getElementById('numD').value);
+            
+            let results = calculateOutputs(a, b, c, d);
+            
+            document.getElementById('output').innerHTML = "<strong>Primo output (Somma):</strong> " + results[0].toFixed(2) + "<br>" +
+                "<strong>Secondo output (Sigmoid):</strong> " + results[1].toFixed(4);
+        }
+    </script>
+</body>
+</html>
