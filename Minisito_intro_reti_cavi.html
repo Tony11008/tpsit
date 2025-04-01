@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minisito Intro Reti e Cavi</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ecf0f1;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            color: #333;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        h1, h2 {
+            color: #2c3e50;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Box for each section with visible borders */
+        .box {
+            background-color: #ffffff;
+            padding: 15px;
+            border: 2px solid #3498db; /* Visible border */
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .box h3 {
+            color: #34495e;
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+
+        .box ul {
+            list-style: none;
+            padding-left: 20px;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        .box ul li {
+            margin-bottom: 6px;
+        }
+
+        .box pre {
+            background-color: #f4f6f7;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-family: 'Courier New', Courier, monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        /* Button Styles */
+        .btn {
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #3498db;
+        }
+
+        .btn:active {
+            background-color: #1f6396;
+        }
+
+        /* Content Toggle */
+        .content {
+            display: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+
+            .box {
+                padding: 12px;
+            }
+
+            .btn {
+                font-size: 0.9rem;
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .btn {
+                font-size: 0.8rem;
+                padding: 8px;
+            }
+        }
+    </style>
+    <script>
+        function toggleContent(id) {
+            const content = document.getElementById(id);
+            if (content.style.display === "none" || content.style.display === "") {
+                content.style.display = "block";
+            } else {
+                content.style.display = "none";
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Minisito: Introduzione a Reti e Cavi</h1>
+        <h2>Unità 5 - Riassunto e Laboratorio</h2>
+
+        <!-- Box 1: Protocolli di rete -->
+        <div class="box">
+            <h3>Protocolli di Rete</h3>
+            <button class="btn" onclick="toggleContent('protocolli')">Scopri i Protocolli</button>
+            <div id="protocolli" class="content">
+                <ul>
+                    <li><strong>TCP/IP:</strong> Suite di protocolli alla base di Internet.</li>
+                    <li><strong>HTTP/HTTPS:</strong> Per la navigazione web sicura.</li>
+                    <li><strong>FTP:</strong> Per il trasferimento di file.</li>
+                    <li><strong>SMTP, POP3, IMAP:</strong> Per la gestione delle email.</li>
+                    <li><strong>ARP:</strong> Per la risoluzione degli indirizzi di rete.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Box 2: Modello OSI -->
+        <div class="box">
+            <h3>Modello OSI</h3>
+            <button class="btn" onclick="toggleContent('modello-osi')">Scopri il Modello OSI</button>
+            <div id="modello-osi" class="content">
+                <ul>
+                    <li><strong>Fisico:</strong> Trasmissione dei segnali fisici.</li>
+                    <li><strong>Data Link:</strong> Gestisce la comunicazione tra dispositivi.</li>
+                    <li><strong>Network:</strong> Gestisce l'instradamento dei pacchetti.</li>
+                    <li><strong>Transport:</strong> Garantisce un trasferimento dati affidabile.</li>
+                    <li><strong>Session:</strong> Gestisce le sessioni di comunicazione.</li>
+                    <li><strong>Presentation:</strong> Gestisce la codifica e decodifica dei dati.</li>
+                    <li><strong>Application:</strong> Interazione con l'utente e le applicazioni.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Box 3: Topologie di rete -->
+        <div class="box">
+            <h3>Topologie di Rete</h3>
+            <button class="btn" onclick="toggleContent('topologie')">Scopri le Topologie</button>
+            <div id="topologie" class="content">
+                <ul>
+                    <li><strong>Bus:</strong> Un singolo cavo collega tutti i dispositivi.</li>
+                    <li><strong>Stella:</strong> Ogni dispositivo è collegato a un nodo centrale.</li>
+                    <li><strong>Anello:</strong> I dispositivi sono collegati in un anello chiuso.</li>
+                    <li><strong>Mesh:</strong> Ogni dispositivo è connesso direttamente a tutti gli altri.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Box 4: Indirizzamento IP -->
+        <div class="box">
+            <h3>Indirizzamento IP</h3>
+            <button class="btn" onclick="toggleContent('indirizzamento-ip')">Scopri l'Indirizzamento IP</button>
+            <div id="indirizzamento-ip" class="content">
+                <ul>
+                    <li><strong>IPv4:</strong> Indirizzi a 32 bit (es. 192.168.0.1).</li>
+                    <li><strong>IPv6:</strong> Indirizzi a 128 bit.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Box 5: Sicurezza Informatica -->
+        <div class="box">
+            <h3>Sicurezza Informatica</h3>
+            <button class="btn" onclick="toggleContent('sicurezza')">Scopri la Sicurezza Informatica</button>
+            <div id="sicurezza" class="content">
+                <ul>
+                    <li><strong>Firewall:</strong> Protegge da accessi non autorizzati.</li>
+                    <li><strong>Crittografia:</strong> Protegge i dati durante il trasferimento.</li>
+                    <li><strong>Antivirus:</strong> Protegge dai virus e altre minacce.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Box 6: Cavo Ethernet -->
+        <div class="box">
+            <h3>Realizzazione di un Cavo Ethernet</h3>
+            <button class="btn" onclick="toggleContent('cavo-ethernet')">Scopri la Procedura</button>
+            <div id="cavo-ethernet" class="content">
+                <ul>
+                    <li><strong>Preparazione del cavo:</strong> Taglia il cavo.</li>
+                    <li><strong>Spellatura dei fili:</strong> Rimuovi la guaina.</li>
+                    <li><strong>Ordinamento fili:</strong> Disponi i fili secondo lo standard T568A/T568B.</li>
+                    <li><strong>Inserimento nei connettori RJ-45:</strong> Posiziona i fili nei connettori.</li>
+                    <li><strong>Crimpatura:</strong> Usa la crimpatrice per fissare i fili.</li>
+                    <li><strong>Test:</strong> Verifica la funzionalità con un tester.</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
