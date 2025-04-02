@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temporizzatore</title>
+    <style>
+        body {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            margin: 0;
+        }
+        .box {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            transition: all 0.5s linear;
+        }
+        .blue { background-color: blue; }
+        .yellow { background-color: yellow; }
+        .red { background-color: red; }
+    </style>
+</head>
+<body>
+    <div id="box1" class="box blue"></div>
+    <div id="box2" class="box yellow"></div>
+
+    <script>
+        function getRandomPosition() {
+            let x = Math.random() * (window.innerWidth - 100);
+            let y = Math.random() * (window.innerHeight - 100);
+            return { x, y };
+        }
+
+        function moveBoxes() {
+            let pos1 = getRandomPosition();
+            let pos2 = getRandomPosition();
+            
+            box1.style.left = pos1.x + 'px';
+            box1.style.top = pos1.y + 'px';
+            
+            box2.style.left = pos2.x + 'px';
+            box2.style.top = pos2.y + 'px';
+
+            setTimeout(checkCollision, 500);
+        }
+
+        function checkCollision() {
+            let rect1 = box1.getBoundingClientRect();
+            let rect2 = box2.getBoundingClientRect();
+
+            let overlap = !(rect1.right < rect2.left || 
+                            rect1.left > rect2.right || 
+                            rect1.bottom < rect2.top || 
+                            rect1.top > rect2.bottom);
+            
+            if (overlap) {
+                box1.classList.add('red');
+                box2.classList.add('red');
+            } else {
+                box1.classList.remove('red');
+                box2.classList.remove('red');
+            }
+        }
+
+        setInterval(moveBoxes, 1000);
+    </script>
+</body>
+</html>
