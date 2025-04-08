@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Esercitazioni con Temporizzatore</title>
+  <style>
+    /* Stili per il primo esercizio (movimento quadrato) */
+    #square {
+      width: 50px;
+      height: 50px;
+      background-color: red;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    /* Stili per il secondo esercizio (scorrimento quadrati gialli con uno rosso) */
+    .square {
+      width: 50px;
+      height: 50px;
+      margin: 5px;
+      display: inline-block;
+      background-color: yellow;
+    }
+
+    .red {
+      background-color: red;
+    }
+
+    /* Contenitore per i quadrati gialli */
+    #squares {
+      margin-top: 200px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Esercizio 1: Movimento del quadrato -->
+  <div id="square"></div>
+
+  <!-- Esercizio 2: Ottieni 8 quadrati gialli, con uno rosso che si muove -->
+  <div id="squares">
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+  </div>
+
+  <script>
+    // Esercizio 1: Movimento del quadrato
+    let square = document.getElementById('square');
+    let position = { top: 0, left: 0 };
+    let step = 50; // Lungo ogni segmento il quadrato si muove di 50px
+    let direction = 'east'; // Iniziamo a muoverci verso est
+
+    function moveSquare() {
+      switch (direction) {
+        case 'east':
+          position.left += step;
+          break;
+        case 'south':
+          position.top += step;
+          break;
+        case 'west':
+          position.left -= step;
+          break;
+        case 'north':
+          position.top -= step;
+          break;
+      }
+
+      // Aggiorna la posizione del quadrato
+      square.style.left = position.left + 'px';
+      square.style.top = position.top + 'px';
+
+      // Cambia la direzione dopo ogni segmento
+      if (direction === 'east') direction = 'south';
+      else if (direction === 'south') direction = 'west';
+      else if (direction === 'west') direction = 'north';
+      else direction = 'east';
+    }
+
+    // Muove il quadrato ogni 1 secondo
+    setInterval(moveSquare, 1000);
+
+    // Esercizio 2: Scorrimento dei quadrati gialli con uno rosso
+    let squares = document.querySelectorAll('.square');
+    let index = 0;
+
+    function moveRedSquare() {
+      // Rimuovi la classe red dal quadrato corrente
+      squares[index].classList.remove('red');
+
+      // Sposta il quadrato rosso alla posizione successiva
+      index = (index + 1) % squares.length; // Torna al primo quadrato quando arrivi alla fine
+
+      // Aggiungi la classe red al nuovo quadrato
+      squares[index].classList.add('red');
+    }
+
+    // Muove il quadrato rosso ogni secondo
+    setInterval(moveRedSquare, 1000);
+  </script>
+</body>
+</html>
