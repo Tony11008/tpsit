@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generatore di Numeri Casuali con Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <div>
+        <p id="mioOut1"></p>
+        <p id="mioOut2"></p>
+        <p id="mioOut3"></p>
+        <p id="mediaOutput"></p>
+        <p id="distanzeOutput"></p>
+    </div>
+
+    <canvas id="graficoNumeri" width="600" height="300"></canvas>
+
+    <script>
+        const ArrayNumeriCasuali = [];
+        const ArrayRapporti = [];
+        const ArrayDistanze = [];
+        const L1 = 0.0;
+        const L2 = 1.0;
+        const mediaRange = (L2 - L1) / 2; // 0.5
+
+        // Setup Chart.js
+        const ctx = document.getElementById('graficoNumeri').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Numeri Casuali',
+                    data: [],
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    tension: 0.3,
+                    pointRadius: 2,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 1
+                    }
+                }
+            }
+        });
+
+        function generaNumeriCasuale() {
+            const casuale = Math.random(); // punto 6
+            ArrayNumeriCasuali.push(casuale);
+            document.getElementById("mioOut1").innerHTML = `Ultimo numero: ${casuale.toFixed(4)}`;
+            document.getElementById("mioOut2").innerHTML = `Array: ${ArrayNumeriCasuali.map(n => n.toFixed(4)).join(", ")}`;
+
+            // punto 3 - rapporto tra numeri consecutivi
+            const len = ArrayNumeriCasuali.length;
+            if (len > 1) {
+                const rapporto = ArrayNumeriCasuali[len - 1] / ArrayNumeriCasuali[len - 2];
+                ArrayRapporti.push(rapporto);
+                document.getElementById("mioOut3").innerHTML = `Rapporti: ${ArrayRapporti.map(n => n.toFixed(4)).join(", ")}`;
+            }
+
+            // punto 5 - distanza da 0.5
+            const distanza = Math.abs(casuale - mediaRange);
+            ArrayDistanze.push(distanza);
+            document.getElementById("distanzeOutput").innerHTML = `Distanze da 0.5: ${ArrayDistanze.map(n => n.toFixed(4)).join(", ")}`;
+
+            // punto 4 - calcolo media ogni 50
+            if (len % 50 === 0) {
+                calcolaMedia();
+            }
+
+            aggiornaGrafico(len, casuale);
+        }
+
+        function calcolaMedia() {
+            const somma = ArrayNumeriCasuali.reduce((acc, val) => acc + val, 0);
+            const media = somma / ArrayNumeriCasuali.length;
+            document.getElementById("mediaOutput").innerHTML = `Media dei numeri: ${media.toFixed(4)}`;
+            console.log("Media calcolata:", media);
+        }
+
+        function aggiornaGrafico(x, y) {
+            chart.data.labels.push(x);
+            chart.data.datasets[0].data.push(y);
+            chart.update();
+        }
+
+        // punto 1 - ogni 500ms
+        setInterval(generaNumeriCasuale, 500);
+    </script>
+
+</body>
+</html>
