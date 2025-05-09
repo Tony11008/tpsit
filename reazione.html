@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test di Reazione Matematica</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        input {
+            font-size: 24px;
+            padding: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+
+<h1>Test di Reazione Matematica</h1>
+<p id="question"></p>
+<input type="text" id="answer" placeholder="Scrivi la risposta" />
+<p id="result"></p>
+
+
+<script>
+    const totalQuestions = 5; // Numero di domande
+    let currentQuestion = 0;
+    let startTime;
+    let reactionTimes = [];
+
+
+    function generateQuestion() {
+        const num1 = Math.floor(Math.random() * 10) + 1; // Numero tra 1 e 10
+        const num2 = Math.floor(Math.random() * 10) + 1; // Numero tra 1 e 10
+        const operation = Math.random() < 0.5 ? '+' : '*'; // Somma o moltiplicazione
+        const question = `${num1} ${operation} ${num2}`;
+        document.getElementById('question').textContent = question;
+        return eval(question); // Calcola il risultato
+    }
+
+
+    function startGame() {
+        currentQuestion = 0;
+        reactionTimes = [];
+        document.getElementById('result').textContent = '';
+        document.getElementById('answer').value = '';
+        nextQuestion();
+    }
+
+
+    function nextQuestion() {
+        if (currentQuestion < totalQuestions) {
+            const correctAnswer = generateQuestion();
+            startTime = new Date().getTime();
+
+
+            document.getElementById('answer').onkeydown = function(event) {
+                if (event.key === 'Enter') {
+                    const userAnswer = parseInt(this.value);
+                    const endTime = new Date().getTime();
+                    const reactionTime = endTime - startTime;
+
+
+                    if (userAnswer === correctAnswer) {
+                        reactionTimes.push(reactionTime);
+                        currentQuestion++;
+                        this.value = ''; // Resetta il campo di input
+                        nextQuestion();
+                    } else {
+                        alert('Risposta sbagliata! Riprova.');
+                    }
+                }
+            };
+        } else {
+            endGame();
+        }
+    }
+
+
+    function endGame() {
+        const totalTime = reactionTimes.reduce((a, b) => a + b, 0);
+        const averageTime = totalTime / reactionTimes.length;
+        document.getElementById('result').textContent = `Hai completato il test! Tempo totale: ${totalTime} ms, Tempo medio: ${averageTime.toFixed(2)} ms`;
+    }
+
+
+    startGame();
+</script>
+
+
+</body>
+</html>
+
