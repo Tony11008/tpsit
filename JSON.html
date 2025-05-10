@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test di Reazione Matematica</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        input {
+            font-size: 24px;
+            padding: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Test di Reazione Matematica</h1>
+<p id="question"></p>
+<input type="text" id="answer" placeholder="Scrivi la risposta" />
+<p id="result"></p>
+
+<button onclick="generaJSON()">Genera file JSON</button>
+
+<script>
+    const totalQuestions = 5;
+    let currentQuestion = 0;
+    let startTime;
+    let reactionTimes = [];
+
+    function generateQuestion() {
+        const num1 = Math.floor(Math.random() * 10) + 1;
+        const num2 = Math.floor(Math.random() * 10) + 1;
+        const operation = Math.random() < 0.5 ? '+' : '*';
+        const question = `${num1} ${operation} ${num2}`;
+        document.getElementById('question').textContent = question;
+        return eval(question);
+    }
+
+    function startGame() {
+        currentQuestion = 0;
+        reactionTimes = [];
+        document.getElementById('result').textContent = '';
+        document.getElementById('answer').value = '';
+        nextQuestion();
+    }
+
+    function nextQuestion() {
+        if (currentQuestion < totalQuestions) {
+            const correctAnswer = generateQuestion();
+            startTime = new Date().getTime();
+
+            document.getElementById('answer').onkeydown = function(event) {
+                if (event.key === 'Enter') {
+                    const userAnswer = parseInt(this.value);
+                    const endTime = new Date().getTime();
+                    const reactionTime = endTime - startTime;
+
+                    if (userAnswer === correctAnswer) {
+                        reactionTimes.push(reactionTime);
+                        currentQuestion++;
+                        this.value = '';
+                        nextQuestion();
+                    } else {
+                        alert('Risposta sbagliata! Riprova.');
+                    }
+                }
+            };
+        } else {
+            endGame();
+        }
+    }
+
+    function endGame() {
+        const totalTime = reactionTimes.reduce((a, b) => a + b, 0);
+        const averageTime = totalTime / reactionTimes.length;
+        document.getElementById('result').textContent = `Hai completato il test! Tempo totale: ${totalTime} ms, Tempo medio: ${averageTime.toFixed(2)} ms`;
+    }
+
+    function generaJSON() {
+        const dati = {
+            tempo_totale: reactionTimes.reduce((a, b) => a + b, 0),
+            tempo_medio: reactionTimes.reduce((a, b) => a + b, 0) / reactionTimes.length,
+            tempi: reactionTimes
+        };
+
+        const jsonString = JSON.stringify(dati, null, 2);
+        const blob = new Blob([jsonString], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'risultati_reazione.json';
+        link.click();
+
+        URL.revokeObjectURL(url);
+    }
+
+    startGame();
+</script>
+
+</body>
+</html>
