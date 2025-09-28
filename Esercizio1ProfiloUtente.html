@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Esercizio 1 - Profilo Utente</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h2>Profilo Utente</h2>
+    <p>Nome: {{ nome }}</p>
+    <p>Cognome: {{ cognome }}</p>
+    <p>Città: {{ citta }}</p>
+  </div>
+
+  <script>
+    const { createApp } = Vue;
+    createApp({
+      data() {
+        return {
+          nome: "Marco",
+          cognome: "Rossi",
+          citta: "Milano"
+        };
+      }
+    }).mount("#app");
+  </script>
+</body>
+</html>

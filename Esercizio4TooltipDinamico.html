@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Esercizio 4 - Tooltip Dinamico</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h2>Tooltip Dinamico</h2>
+    <p v-bind:title="messaggioTooltip">
+      Passa il mouse qui sopra per vedere il tooltip
+    </p>
+    <input v-model="messaggioTooltip" placeholder="Scrivi un nuovo tooltip" />
+  </div>
+
+  <script>
+    const { createApp } = Vue;
+    createApp({
+      data() {
+        return {
+          messaggioTooltip: "Questo è un tooltip dinamico"
+        };
+      }
+    }).mount("#app");
+  </script>
+</body>
+</html>

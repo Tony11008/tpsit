@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Esercizio 2 - Dettagli Prodotto</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h2>Dettagli Prodotto</h2>
+    <p>Il prodotto {{ prodottoNome }} costa {{ prodottoPrezzo }} €</p>
+  </div>
+
+  <script>
+    const { createApp } = Vue;
+    createApp({
+      data() {
+        return {
+          prodottoNome: "Computer",
+          prodottoPrezzo: 1200
+        };
+      }
+    }).mount("#app");
+  </script>
+</body>
+</html>

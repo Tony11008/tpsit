@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Esercizio 3 - Immagine Disattivata</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h2>Immagine Disattivata</h2>
+    <button v-bind:disabled="immagineDisabilitata">Cliccami</button>
+    <p>
+      Stato: 
+      <span v-if="immagineDisabilitata">DISABILITATO</span>
+      <span v-else>ABILITATO</span>
+    </p>
+    <button @click="immagineDisabilitata = !immagineDisabilitata">
+      Cambia Stato
+    </button>
+  </div>
+
+  <script>
+    const { createApp } = Vue;
+    createApp({
+      data() {
+        return {
+          immagineDisabilitata: true
+        };
+      }
+    }).mount("#app");
+  </script>
+</body>
+</html>
